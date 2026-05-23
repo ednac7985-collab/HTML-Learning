@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CountdownWithButton</title>
+    <style>
+         body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 80px;
+         }
+         .box {
+            background: #f0f0f0;
+            padding: 40px;
+            width: 250px;
+            margin: 30px auto;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+        #timer {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Custom Countdown</h1>
+
+    <input type="number" id="inputTime" placeholder="Enter Seconds" />
+    <button onclick="startTimer()">Start</button>
+
+    <div class="box">
+        <div id="timer">0</div>
+    </div>
+
+    <script>
+        let countdown;
+
+        function startTimer() {
+            const inputTime = document.getElementById('inputTime').value;
+            let timeLeft = parseInt(inputTime);
+
+            if (isNaN(timeLeft) || timeLeft < 0) {
+                alert('Please enter a valid number of seconds.');
+                return;
+            }
+
+            const timerElement = document.getElementById('timer');
+            timerElement.textContent = timeLeft;
+
+            clearInterval(countdown); // Clear any existing countdown
+
+            countdown = setInterval(() => {
+                timeLeft--;
+                timerElement.textContent = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(countdown);
+                    timerElement.textContent = 'Time\'s up!';
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
